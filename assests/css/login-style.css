@@ -18,13 +18,38 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
- .img {
+.img {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.register {
+.photo-frame {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.photo1 {
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    width: 48%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: rotate(-5deg);
+}
+
+.photo2 {
+    position: absolute;
+    bottom: -15px;
+    right: 30px;
+    width: 48%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: rotate(8deg);
+}
+.login{
     flex: 1;
     padding: 40px;
 }
@@ -41,7 +66,7 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
-    width: 100%;
+    width: 90%;
 }
 
 .input:focus {
@@ -83,15 +108,7 @@ a:hover {
     border-radius: 5px;
     margin-bottom: 15px;
     font-size: 15px;
-    width: 100%;
-}
-
-.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.error ,.er {
+    width: 90%;
     background-color: #f0bdbd;
 }
 
@@ -101,51 +118,3 @@ a:hover {
     }
 }
 
-
-/* @media screen and (max-width: 768px) {
-    .container {
-        margin: 10px;
-        border-radius: 10px;
-    }
-    
-    .register {
-        padding: 15px;
-    }
-    
-    h2 {
-        font-size: 20px;
-    }
-    
-    .input {
-        padding: 10px;
-    }
-    
-
-    button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    }
-
-    @media screen and (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        margin: 5px;
-    }
-
-    .register {
-        padding: 10px;
-    }
-
-    h2 {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-
-    p {
-        font-size:14px;
-    }
-} */

@@ -1,5 +1,4 @@
 <?php
-// صفحة التسجيل
 require '../includes/db.php';
 
 $username = "";
@@ -54,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssss", $username, $email, $hashed_password, $role);
 
             if ($stmt->execute()) {
-                $message = "<div class='alert alert-success'>Registration successful, you can log in .</div>";
+                $message = "<div class='alert success'>Registration successful, you can log in .</div>";
                 $username = $email = $password = $confirm_password = "";
             } else {
-                $message = "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+                $message = "<div class='alert error'>Error: " . $stmt->error . "</div>";
             }
         }
     }
@@ -74,10 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <div class="img">
-            <div class="photo-frame">
-                <img class="photo1"src="../assests/images/reg-img/jewelry2.png" alt="">
-                <img class="photo2"src="../assests/images/reg-img/jewelry1.png" alt="">
-            </div>
+            <img src="../assests/images/reg-img/Logo.png" alt="Logo">
         </div>
 
         <div class="register">
@@ -126,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
 
             <p>
-                Already you have account?<a href="login.php">Login</a>
+                Already you have account?<a href="login.php">Sign in</a>
             </p>
         </div>
     </div>

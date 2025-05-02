@@ -2,26 +2,44 @@
 session_start();
 require '../includes/db.php';
 
+$email = "";
+$password = "";
+$errors = [];
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
-    $result = mysqli_query($conn, $query);
+    if (empty($email)) {
+        $errors['email'] = "Email is required";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "Invalid email format";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Password is required";
+    }
 
-    if (mysqli_num_rows($result) == 1) {
-        $user = mysqli_fetch_assoc($result);
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            header("Location: ../index.php");
-            exit;
+    if (empty($errors)) {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $user = $result->fetch_assoc();
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['role'] = $user['role'];
+                header("Location: ../index.php");
+                exit;
+            } else {
+                $errors['password'] = "Incorrect password";
+            }
         } else {
-            $message = "<div class='alert alert-danger'>❌ كلمة المرور غير صحيحة.</div>";
+            $errors['email'] = "Email not registered";
         }
-    } else {
-        $message = "<div class='alert alert-danger'>❌ البريد الإلكتروني غير مسجل.</div>";
     }
 }
 ?>
@@ -30,34 +48,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>تسجيل الدخول</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login</title>
+    <link href="../assests/css/login-style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
+    <div class="container">
+        <div class="login">
+            <h2>SIGN IN</h2>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">تسجيل الدخول</h2>
+            <?php if (!empty($message)) echo $message; ?>
 
-    <?php if (!empty($message)) echo $message; ?>
+            <form method="POST" action="">
+                <div>
+                    <input type="email" class="input" name="email" value="<?= htmlspecialchars($email) ?>" placeholder="E-MAIL">
+                    <div>
+                        <?php if (isset($errors['email'])) : ?>
+                            <p class="er"><?= $errors['email'] ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-    <form method="POST" action="">
-        <div class="mb-3">
-            <label for="email" class="form-label">البريد الإلكتروني</label>
-            <input type="email" class="form-control" name="email" required>
+                <div>
+                    <input type="password" class="input" name="password" placeholder="PASSWORD">
+                    <div>
+                        <?php if (isset($errors['password'])) : ?>
+                            <p class="er"><?= $errors['password'] ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <button type="submit">SIGN IN</button>
+            </form>
+            <p>
+                Don't have an account?<a href="register.php">Sign up</a>
+            </p>
         </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">كلمة المرور</label>
-            <input type="password" class="form-control" name="password" required>
+        <div class="img">
+            <div class="photo-frame">
+                <img class="photo1" src="../assests/images/in-img/jewelry1.png" alt="jewelry1">
+                <img class="photo2" src="../assests/images/in-img/jewelry2.png" alt="jewelry2">
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-success w-100">دخول</button>
-    </form>
-
-    <p class="mt-3 text-center">
-        لا تملك حسابًا؟ <a href="register.php">سجّل الآن</a>
-    </p>
-</div>
+    </div>
 
 </body>
 </html>

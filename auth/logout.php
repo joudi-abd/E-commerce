@@ -1,9 +1,7 @@
 <?php
-    session_start();           // بدء الجلسة
-    session_unset();           // حذف جميع متغيرات الجلسة
-    session_destroy();         // تدمير الجلسة نهائيًا
-
-    // إعادة التوجيه لصفحة تسجيل الدخول أو الرئيسية
+    session_start();       
+    session_unset();           
+    session_destroy();        
     header("Location: login.php");
     exit;
 ?>

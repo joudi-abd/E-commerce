@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0bdbd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color:#faebd7;
+    width: 900px;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+ .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register {
+    flex: 1;
+    padding: 40px;
+}
+
+h2 {
+    color: #e88e8e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input {
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    width: 100%;
+}
+
+.input:focus {
+    border-color: #e88e8e;
+    box-shadow: 0 0 5px rgba(232, 142, 142, 0.5);
+}
+
+button {
+    background-color: #e88e8e;
+    border: none;
+    padding:12px 30px;
+    border-radius: 8px;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d77d7d;
+}
+
+a {
+    color: #e88e8e;
+    text-decoration: none;
+}
+p {
+    text-align: center;
+
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.alert , .er{
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error ,.er {
+    background-color: #f0bdbd;
+}
+
+@media screen and (max-width:700px) {
+    .img {
+        display: none;
+    }
+}
+
+
+/* @media screen and (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+    .register {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+    
+    .input {
+        padding: 10px;
+    }
+    
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    }
+
+    @media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 5px;
+    }
+
+    .register {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size:14px;
+    }
+} */

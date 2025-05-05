@@ -1,22 +1,21 @@
 <?php
 session_start();
 
-// إذا لم يكن المستخدم مسجلاً الدخول، نحوله إلى login
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth/login.php");
     exit;
 }
 ?>
 
-<!-- محتوى الصفحة الرئيسية -->
 <!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>الرئيسية</title>
+    <title>Rose Store</title>
+    <link rel="stylesheet" href="assests/css/style.css">
 </head>
 <body>
     <h2>مرحبًا، <?php echo $_SESSION['username']; ?>!</h2>
-    <a href="auth/logout.php">تسجيل الخروج</a>
+    <a href="auth/logout.php">Logout </a>
 </body>
 </html>

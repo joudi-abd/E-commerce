@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                header("Location: ../index.php");
+                header("Location: ../pages/home.php");
                 exit;
             } else {
                 $errors['password'] = "Incorrect password";

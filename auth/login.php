@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                header("Location: ../pages/home.php");
+                header("Location: ../index.php");
                 exit;
             } else {
                 $errors['password'] = "Incorrect password";
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="../assests/css/login-style.css" rel="stylesheet">
+    <link href="../assets/css/login-style.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -86,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="img">
             <div class="photo-frame">
-                <img class="photo1" src="../assests/images/in-img/jewelry1.png" alt="jewelry1">
-                <img class="photo2" src="../assests/images/in-img/jewelry2.png" alt="jewelry2">
+                <img class="photo1" src="../assets/images/in-img/jewelry1.png" alt="jewelry1">
+                <img class="photo2" src="../assets/images/in-img/jewelry2.png" alt="jewelry2">
             </div>
         </div>
     </div>

@@ -69,12 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link href="../assests/css/register-style.css" rel="stylesheet">
+    <link href="../assets/css/register-style.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="img">
-            <img src="../assests/images/reg-img/Logo.png" alt="Logo">
+            <img src="../assets/images/reg-img/Logo.png" alt="Logo">
         </div>
 
         <div class="register">

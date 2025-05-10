@@ -2,12 +2,10 @@
 session_start();
 require '../includes/db.php';
 
-// تجهيز السلة
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// التحقق من الطلب للإضافة
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     $product_id = intval($_POST['product_id']);
 
@@ -35,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     }
 }
 
-// عرض تفاصيل المنتج
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die('Product ID is missing.');
 }

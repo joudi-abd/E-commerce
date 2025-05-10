@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-//Edit
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user'])) {
     $id       = $_POST['id'];
     $username = $_POST['username'];
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user'])) {
     exit;
 }
 
-//Delete
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     $id = $_POST['id'];
 
@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     exit;
 }
 
-//Add
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     $username = $_POST['username'];
     $email    = $_POST['email'];
@@ -87,18 +86,18 @@ $result = $stmt->get_result();
         }
     </style>
 </head>
-<body>
+<body dir="rtl">
 <div class="container">
-    <h2 style="text-align:center; margin:20px 0 0 0">USERS LIST</h2>
+    <h2 style="text-align:center; margin:20px 0 0 0">قائمة المستخدمين</h2>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th style="background-color:#f0bdbd;">ID</th>
-                    <th style="background-color:#f0bdbd;">NAME</th>
-                    <th style="background-color:#f0bdbd;">E-MAIL</th>
-                    <th style="background-color:#f0bdbd;">ROLE</th>
-                    <th style="background-color:#f0bdbd;">PROCEDURES</th>
+                    <th style="background-color:#f0bdbd;">المعرف</th>
+                    <th style="background-color:#f0bdbd;">الاسم</th>
+                    <th style="background-color:#f0bdbd;">الإيميل</th>
+                    <th style="background-color:#f0bdbd;">الدور</th>
+                    <th style="background-color:#f0bdbd;">إجراءات</th>
                 </tr>
             </thead>
             <tbody>
@@ -109,7 +108,7 @@ $result = $stmt->get_result();
                         <td style="background-color:#faebd7;"><?= htmlspecialchars($user['email']) ?></td>
                         <td style="background-color:#faebd7;"><?= $user['role'] ?></td>
                         <td style="background-color:#faebd7;">
-                            <div class="btn-group">
+                            <div class="btn-group" dir="ltr">
                                 <button class="btn btn-outline-secondary deleteBtn"
                                         data-id="<?= $user['id'] ?>" 
                                         data-username="<?= htmlspecialchars($user['username']) ?>" 
@@ -131,48 +130,39 @@ $result = $stmt->get_result();
         </table>
     </div>
     <div style="text-align:center;">
-         <a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addUserModal">add user</a>
+         <a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addUserModal">إضافة مستخدم جديد</a>
     </div>
 </div>
-
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
-      <div class="modal-header" style="background-color:#f0bdbd;>
-        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between;">
+        <h5 class="modal-title" id="editUserModalLabel">تعديل المستخدم</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin:0px"></button>
       </div>
-
       <form method="post">
         <div class="modal-body">
-
           <input type="hidden" name="id" id="edit-id">
           <input type="hidden" name="edit_user" value="1">
-
           <div class="mb-3">
-            <label class="form-label">Name:</label>
+            <label class="form-label">الأسم:</label>
             <input type="text" name="username" id="edit-username" class="form-control" required>
           </div>
-
           <div class="mb-3">
-            <label class="form-label">E-mail:</label>
+            <label class="form-label">الإيميل:</label>
             <input type="email" name="email" id="edit-email" class="form-control" required>
           </div>
-
           <div class="mb-3">
-            <label class="form-label">Role:</label>
+            <label class="form-label">الدور:</label>
             <select name="role" id="edit-role" class="form-select" required>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="user">مستخدم</option>
+              <option value="admin">أدمن</option>
             </select>
           </div>
-
         </div>
-
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">Update</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button type="submit" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">تحديث</button>
         </div>
 
       </form>
@@ -184,35 +174,34 @@ $result = $stmt->get_result();
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <div class="modal-header" style="background-color:#f0bdbd;">
-        <h5 class="modal-title" id="deleteUserModalLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between; ">
+        <h5 class="modal-title" id="deleteUserModalLabel">تأكيد الحذف</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin:0px"></button>
       </div>
 
       <form method="post">
         <div class="modal-body">
-          <p>Are you sure you want to delete this user?</p>
+          <p>هل انت متأكد من حذف هذا المستخدم؟</p>
           <input type="hidden" name="id" id="delete-id">
           <input type="hidden" name="delete_user" value="1">
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-outline-danger">Delete</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button type="submit" class="btn btn-outline-danger">حذف</button>
         </div>
       </form>
 
     </div>
   </div>
 </div>
-
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <div class="modal-header" style="background-color:#f0bdbd;">
-        <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between;">
+        <h5 class="modal-title" id="addUserModalLabel">إضافة مستخدم جديد</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin:0px"></button>
       </div>
 
       <form method="post">
@@ -221,33 +210,33 @@ $result = $stmt->get_result();
           <input type="hidden" name="add_user" value="1">
 
           <div class="mb-3">
-            <label class="form-label">Name:</label>
+            <label class="form-label">الاسم:</label>
             <input type="text" name="username" class="form-control" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">E-mail:</label>
+            <label class="form-label">الإيميل:</label>
             <input type="email" name="email" class="form-control" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Password:</label>
+            <label class="form-label">كلمة المرور:</label>
             <input type="password" name="password" class="form-control" required>
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Role:</label>
+            <label class="form-label">الدور:</label>
             <select name="role" class="form-select" required>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="user">مستخدم</option>
+              <option value="admin">أدمن</option>
             </select>
           </div>
 
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">Add</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button type="submit" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">إضافة</button>
         </div>
 
       </form>

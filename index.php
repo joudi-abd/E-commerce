@@ -23,7 +23,7 @@ if ($result && $result->num_rows > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body{
-            font-family: Arial, serif ;
+            font-family: Trebuchet, serif;
             background-color :#f7efed 
         }
         .navbar-toggler{
@@ -71,9 +71,7 @@ if ($result && $result->num_rows > 0) {
                     <a href="#" class="text-dark"><i class="fa-brands fa-instagram"></i></a> 
                     <a href="pages/cart.php" class="text-dark">
                         <i class="fa-solid fa-cart-shopping" style="font-size: 18px;">
-
                             <?php
-                            // عد المنتجات في السلة
                             $cart_count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                             if ($cart_count > 0) {
                                 echo "<span class='badge bg-dark' style='font-size: 7px;'>$cart_count</span>";
@@ -91,12 +89,12 @@ if ($result && $result->num_rows > 0) {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="index.php"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.php"><i class="fa-solid fa-house"></i> الصفحة الرئيسية</a></li>
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                            <li class="nav-item"><a href="./pages/users.php" class="nav-link"><i class="fa-solid fa-users"></i> Manage Users</a></li>
+                            <li class="nav-item"><a href="./pages/users.php" class="nav-link"><i class="fa-solid fa-users"></i> إدارة المستخدمين</a></li>
                         <?php endif; ?>
-                        <li class="nav-item"><a class="nav-link" href="./pages/products.php"><i class="fa-solid fa-table"></i> Manage Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./pages/products.php"><i class="fa-solid fa-table"></i> إدارة المنتجات</a></li>
                     <?php endif; ?>
                     </ul>
                 </div>
@@ -107,7 +105,7 @@ if ($result && $result->num_rows > 0) {
         </nav>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="profileOffcanvas" style="background-color: rgb(250 215 232);"> 
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title"><i class="fa-solid fa-user"></i> My Profile</h5>
+                <h5 class="offcanvas-title"><i class="fa-solid fa-user"></i>  ملفي الشخصي</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body">
@@ -116,12 +114,12 @@ if ($result && $result->num_rows > 0) {
                         <h6><?php echo $_SESSION['username'] ?? 'Guest'; ?></h6>
                     </div>
                     <ul class="list-unstyled">
-                        <li><a href="auth/logout.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                        <li><a href="auth/logout.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98"><i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج</a></li>
                     </ul>
                 <?php else: ?>
                     <ul class="list-unstyled">
-                        <li><a href="auth/login.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
-                        <li><a href="auth/register.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98"><i class="fa-solid fa-plus"></i> Create a new account</a></li>
+                        <li><a href="auth/login.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98; margin-bottom:5px;"><i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول</a></li>
+                        <li><a href="auth/register.php" class="btn btn-outline-dark w-100" style="background-color:#D17D98; margin-bottom:5px;"><i class="fa-solid fa-plus"></i> إنشاء حساب جديد</a></li>
                     </ul>
                 <?php endif; ?>
             </div>
@@ -131,8 +129,8 @@ if ($result && $result->num_rows > 0) {
     <main  dir="rtl" style="text-align: center;">
         <section class="py-5 text-center">
             <div class="container">
-                <h2 class="mb-3">أجمل إكسسوارات عالم الموضة لتكتمل إطلالتك</h2>
-                <p class="mb-4">اكتشفي أحدث تشكيلة من الإكسسوارات العصرية التي تناسب كل المناسبات</p>
+                <h1 class="mb-3">عالم من الجمال</h1>
+                <h3 class="mb-4">كل ما هو جديد في عالم الإكسسوارات والموضة </ا>
             </div>
         </section>
 
@@ -151,11 +149,11 @@ if ($result && $result->num_rows > 0) {
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span class="visually-hidden">السابق</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <span class="visually-hidden">التالي</span>
                 </button>
             </div>  
         </section>
@@ -177,7 +175,7 @@ if ($result && $result->num_rows > 0) {
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <p class="text-center">No products found!.</p>
+                        <p class="text-center">لا يوجد منتجات لعرضها !</p>
                     <?php endif; ?>
                 </div>
             </div>

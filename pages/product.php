@@ -2,13 +2,43 @@
 session_start();
 require '../includes/db.php';
 
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+    $product_id = intval($_POST['product_id']);
+
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $productData = $result->fetch_assoc();
+
+        if (isset($_SESSION['cart'][$product_id])) {
+            $_SESSION['cart'][$product_id]['quantity'] += 1;
+        } else {
+            $_SESSION['cart'][$product_id] = [
+                'id' => $productData['id'],
+                'name' => $productData['product_name'],
+                'price' => $productData['price'],
+                'image' => $productData['image'],
+                'quantity' => 1
+            ];
+        }
+
+        $_SESSION['success_message'] = "تمت إضافة المنتج إلى السلة بنجاح!";
+    }
+}
+
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die('Product ID is missing.');
 }
 
 $product_id = intval($_GET['id']);
 
-// Fetch product details
 $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
 $stmt->bind_param("i", $product_id);
 $stmt->execute();
@@ -52,7 +82,12 @@ $product = $result->fetch_assoc();
 <body dir="rtl">
     <div class="container py-5">
         <a href="../index.php" class="btn btn-secondary mb-4 d-block mx-auto" style="max-width: 200px;">العودة للصفحة الرئيسية</a>
-        
+
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="alert alert-outline-success text-center"><?= $_SESSION['success_message'] ?></div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+
         <div class="card p-4">
             <div class="row g-4 align-items-center">
                 <div class="col-md-5 text-center">
@@ -64,9 +99,9 @@ $product = $result->fetch_assoc();
                     <h2 class="mb-3"><?= htmlspecialchars($product['product_name']) ?></h2>
                     <h4 class="text-success mb-3">سعر المنتج : <?= htmlspecialchars($product['price']) ?> $</h4>
                     <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
-                    <form action="add_to_cart.php" method="post">
+                    <form action="" method="post" class="text-center">
                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
-                        <button type="submit" class="btn btn-primary mt-3">أضف إلى السلة 🛒</button>
+                        <button type="submit" class="btn btn-secondary mt-3">أضف إلى السلة</button>
                     </form>
                 </div>
             </div>

@@ -2,18 +2,15 @@
 session_start();
 require '../includes/db.php';
 
-// إذا كانت السلة غير موجودة في الجلسة، قم بإنشائها
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-$total = 0; // إجمالي السلة
+$total = 0; 
 
-// عملية إضافة منتج للسلة
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     $product_id = intval($_POST['product_id']);
 
-    // جلب تفاصيل المنتج من قاعدة البيانات
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
@@ -22,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     if ($result->num_rows > 0) {
         $product = $result->fetch_assoc();
 
-        // إضافة المنتج أو تحديث الكمية
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id]['quantity'] += 1;
         } else {
@@ -36,19 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
         }
     }
 
-    // إعادة توجيه المستخدم إلى الصفحة الحالية بعد إضافة المنتج
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// عملية حذف منتج من السلة
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
     if (isset($_SESSION['cart'][$id])) {
         unset($_SESSION['cart'][$id]);
     }
 
-    // إعادة توجيه المستخدم إلى صفحة السلة بعد الحذف
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
 }
@@ -102,11 +95,11 @@ if (isset($_GET['id'])) {
     </style>
 </head>
 <body dir="rtl">
-    <div class="container py-5">
-        <h2 class="mb-4 text-center">🛒 سلة المشتريات</h2>
+    <div class="container py-5 text-center">
+        <h2 class="mb-4 text-center">سلة المشتريات</h2>
 
         <?php if (empty($_SESSION['cart'])): ?>
-            <p>السلة فارغة حالياً.</p>
+            <p>السلة فارغة</p>
         <?php else: ?>
             <div class="row">
                 <?php foreach ($_SESSION['cart'] as $item):
@@ -129,7 +122,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="text-center">
                 <h4>الإجمالي: <?= $total ?> $</h4>
-                <a href="#" class="btn btn-outline-success mt-3">إتمام الشراء ✅</a>
+                <a href="#" class="btn btn-outline-success mt-3">إتمام الشراء</a>
             </div>
         <?php endif; ?>
     </div>

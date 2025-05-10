@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     if (empty($email)) {
-        $errors['email'] = "Email is required";
+        $errors['email'] = "يرجى إدخال البريد الإلكتروني";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "Invalid email format";
+        $errors['email'] = "البريد الإلكتروني غير صالح";
     }
     if (empty($password)) {
-        $errors['password'] = "Password is required";
+        $errors['password'] = "يرجى إدخال كلمة المرور";
     }
 
     if (empty($errors)) {
@@ -35,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ../index.php");
                 exit;
             } else {
-                $errors['password'] = "Incorrect password";
+                $errors['password'] = "كلمة المرور غير صحيحة";
             }
         } else {
-            $errors['email'] = "Email not registered";
+            $errors['email'] = "البريد الإلكتروني غير مسجل";
         }
     }
 }
@@ -52,16 +52,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
     <link href="../assets/css/login-style.css" rel="stylesheet">
 </head>
-<body>
+<body dir="rtl">
     <div class="container">
         <div class="login">
-            <h2>SIGN IN</h2>
+            <h2>تسجيل دخول</h2>
 
             <?php if (!empty($message)) echo $message; ?>
 
             <form method="POST" action="">
                 <div>
-                    <input type="email" class="input" name="email" value="<?= htmlspecialchars($email) ?>" placeholder="E-MAIL">
+                    <input type="email" class="input" name="email" value="<?= htmlspecialchars($email) ?>" placeholder="البريد الإلكتروني">
                     <div>
                         <?php if (isset($errors['email'])) : ?>
                             <p class="er"><?= $errors['email'] ?></p>
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div>
-                    <input type="password" class="input" name="password" placeholder="PASSWORD">
+                    <input type="password" class="input" name="password" placeholder="كلمة المرور">
                     <div>
                         <?php if (isset($errors['password'])) : ?>
                             <p class="er"><?= $errors['password'] ?></p>
@@ -78,10 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
 
-                <button type="submit">SIGN IN</button>
+                <button type="submit">تسجيل الدخول</button>
             </form>
             <p>
-                Don't have an account?<a href="register.php">Sign up</a>
+                 ألا تملك حساباً؟ <a href="register.php">سجل الآن  </a>
             </p>
         </div>
         <div class="img">

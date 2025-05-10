@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-//ADD PRODUCT
 if (isset($_POST['add_product'])) {
     $name = $_POST['product_name'];
     $desc = $_POST['description'];
@@ -28,7 +27,6 @@ if (isset($_POST['add_product'])) {
     exit;
 }
 
-//EDIT PRODUCT
 if (isset($_POST['edit_product'])) {
     $id = $_POST['product_id'];
     $name = $_POST['product_name'];
@@ -53,7 +51,6 @@ if (isset($_POST['edit_product'])) {
     exit;
 }
 
-//DELETE PRODUCT
 if (isset($_POST['delete_product'])) {
     $id = $_POST['product_id'];
     $result = $conn->query("SELECT image FROM products WHERE id = $id");
@@ -71,7 +68,6 @@ if (isset($_POST['delete_product'])) {
     exit;
 }
 
-//FETCH PRODUCTS
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
 
@@ -126,12 +122,12 @@ if ($result && $result->num_rows > 0) {
     
     </style>
 </head>
-<body>
+<body dir="rtl">
 <div class="container">
-    <h2  style="text-align:center;" class="mb-4">Manage products</h2>
+    <h2  style="text-align:center;" class="mb-4">قائمة المنتجات</h2>
 
     <div class="adding" style="text-align:right;">
-        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa-solid fa-plus"></i>Add a new product</button>
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa-solid fa-plus"></i>إضافة منتج جديد</button>
     </div>
 
     <div class="row">
@@ -149,7 +145,7 @@ if ($result && $result->num_rows > 0) {
                             <p class="card-text"><?= htmlspecialchars($product['description']) ?></p>
                             <p class="card-text"><strong><?= htmlspecialchars($product['price']) ?> $</strong></p>
                         </div>
-                        <div class="btn-group" style="text-align:center;">
+                        <div class="btn-group" style="text-align:center;" dir="ltr">
                             <button class="btn btn-outline-secondary deleteBtn" data-bs-toggle="modal" data-bs-target="#editModal<?= $product['id'] ?>">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </button>
@@ -159,58 +155,56 @@ if ($result && $result->num_rows > 0) {
                         </div>
                     </div>
                 </div>
-                <!-- Edit Modal -->
                 <div class="modal fade" id="editModal<?= $product['id'] ?>" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form method="post" enctype="multipart/form-data">
-                                <div class="modal-header" style="background-color:#f0bdbd;>
-                                    <h5 class="modal-title">Edit product</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between;">
+                                    <h5 class="modal-title">تعديل المنتج</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="margin:0px"></button>
                                 </div>
                                 <div class="modal-body">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <div class="mb-3">
-                                        <label class="form-label">Product name</label>
+                                        <label class="form-label">اسم المنتج</label>
                                         <input type="text" name="product_name" class="form-control" value="<?= htmlspecialchars($product['product_name']) ?>" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Description</label>
+                                        <label class="form-label">الوصف</label>
                                         <textarea name="description" class="form-control" required><?= htmlspecialchars($product['description']) ?></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Price</label>
+                                        <label class="form-label">السعر</label>
                                         <input type="number" name="price" class="form-control" value="<?= htmlspecialchars($product['price']) ?>" step="0.01" required>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="inputGroupFile01">img</label>
+                                        <label class="input-group-text" for="inputGroupFile01">الصورة</label>
                                         <input type="file" name="image" class="form-control" id="inputGroupFile01">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" name="edit_product" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">Update</button>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="submit" name="edit_product" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">تحديث</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <!-- Delete Modal -->
                 <div class="modal fade" id="deleteModal<?= $product['id'] ?>" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form method="post">
-                                <div class="modal-header" style="background-color:#f0bdbd;>
-                                    <h5 class="modal-title">Delete the product</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between;">
+                                    <h5 class="modal-title">تعديل المنتج</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="margin:0px"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete the product?<strong><?= htmlspecialchars($product['product_name']) ?></strong>؟
+                                    هل انت متأكد من حذف المنتج؟<strong><?= htmlspecialchars($product['product_name']) ?></strong>؟
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" name="delete_product" class="btn btn-outline-danger">Delete</button>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="submit" name="delete_product" class="btn btn-outline-danger">حذف</button>
                                 </div>
                             </form>
                         </div>
@@ -218,45 +212,40 @@ if ($result && $result->num_rows > 0) {
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <p class="text-center">No products found!.</p>
+            <p class="text-center">لا يوجد منتجات</p>
         <?php endif; ?>
     </div>
 </div>
-
-
-
-
-<!-- Add Modal -->
 <div class="modal fade" id="addModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" enctype="multipart/form-data">
-                <div class="modal-header" style="background-color:#f0bdbd;>
-                    <h5 class="modal-title">Add a new product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header" style="background-color:#f0bdbd; justify-content:space-between;">
+                    <h5 class="modal-title">إضافة منتج جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="margin:0px"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Product name</label>
+                        <label class="form-label">اسم المنتج</label>
                         <input type="text" name="product_name" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">الوصف</label>
                         <textarea name="description" class="form-control" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Price</label>
+                        <label class="form-label">السعر</label>
                         <input type="number" name="price" class="form-control" step="0.01" required> 
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupFile01">img</label>
+                        <label class="input-group-text" for="inputGroupFile01">صورة المنتج</label>
                         <input type="file" name="image" class="form-control" id="inputGroupFile01">
                     </div>
                 </div>
         
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" name="add_product" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">Add</button>        
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" name="add_product" class="btn btn-outline-secondary" style="background-color:#f0bdbd;">إضافة</button>        
                 </div>
             </form>
         </div>

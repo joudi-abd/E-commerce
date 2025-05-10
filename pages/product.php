@@ -35,26 +35,40 @@ $product = $result->fetch_assoc();
         }
         .product-img {
             max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        img{
-           
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            background-color: #fff;
+            max-width: 700px;
+            margin: auto;
         }
     </style>
 </head>
 <body dir="rtl">
     <div class="container py-5">
-        <a href="../index.php" class="btn btn-secondary mb-4">العودة للصفحة الرئيسية</a>
-        <div class="row">
-            <div class="col-md-4">
-                <?php if (!empty($product['image'])) : ?>
-                    <img src="../assets/images/pro-img/<?= htmlspecialchars($product['image']) ?>" alt="Product Image" class="product-img">
-                <?php endif; ?>
-            </div>
-            <div class="col-md-8">
-                <h2><?= htmlspecialchars($product['product_name']) ?></h2>
-                <h4 class="text-success mb-3">سعر المنتج : <?= htmlspecialchars($product['price']) ?> $</h4>
-                <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
+        <a href="../index.php" class="btn btn-secondary mb-4 d-block mx-auto" style="max-width: 200px;">العودة للصفحة الرئيسية</a>
+        
+        <div class="card p-4">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-5 text-center">
+                    <?php if (!empty($product['image'])) : ?>
+                        <img src="../assets/images/pro-img/<?= htmlspecialchars($product['image']) ?>" alt="Product Image" class="product-img">
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-7">
+                    <h2 class="mb-3"><?= htmlspecialchars($product['product_name']) ?></h2>
+                    <h4 class="text-success mb-3">سعر المنتج : <?= htmlspecialchars($product['price']) ?> $</h4>
+                    <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
+                    <form action="add_to_cart.php" method="post">
+                        <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                        <button type="submit" class="btn btn-primary mt-3">أضف إلى السلة 🛒</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

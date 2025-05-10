@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($password)) {
         $errors['password'] = "Password is required";
-    } elseif (strlen($password) < 6) {
-        $errors['password'] = "Password must be at least 6 characters long";
+    } elseif (strlen($password) < 5) {
+        $errors['password'] = "Password must be at least 5 characters long";
     }
 
     if (empty($confirm_password)) {

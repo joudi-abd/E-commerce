@@ -64,11 +64,27 @@ $result = $stmt->get_result();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        body{background-color:#f0bdbd; font-family: Trebuchet, serif ;}
-        .container{background-color:#faebd7; border-radius: 10px;}
-        table { margin: 20px auto;}
-        th, td {text-align: center;}
-        a { text-decoration: none; margin: 5px; }
+        body{
+          background-color:#f0bdbd; 
+          font-family: Trebuchet, serif ;
+        }
+        .container{
+          background-color:#faebd7;
+          border-radius: 10px;
+        }
+        table { 
+          margin: 20px auto;
+        }
+        th, td {
+          text-align: center;
+        }
+        a {
+          text-decoration: none; 
+          margin: 5px;
+        }
+        .dang:hover{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -102,7 +118,7 @@ $result = $stmt->get_result();
                                         data-bs-toggle="modal" data-bs-target="#editUserModal">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
-                                <button class="btn btn-outline-secondary deleteBtn" 
+                                <button class="btn btn-outline-secondary deleteBtn dang" 
                                     data-id="<?= $user['id'] ?>" 
                                     data-bs-toggle="modal" data-bs-target="#deleteUserModal">
                                     <i class="fa-regular fa-trash-can"></i>

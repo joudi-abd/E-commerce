@@ -120,6 +120,9 @@ if ($result && $result->num_rows > 0) {
         .adding{
             margin:20px 0px;
         }
+        .dang:hover{
+            background-color: red;
+        }
     
     </style>
 </head>
@@ -150,7 +153,7 @@ if ($result && $result->num_rows > 0) {
                             <button class="btn btn-outline-secondary deleteBtn" data-bs-toggle="modal" data-bs-target="#editModal<?= $product['id'] ?>">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </button>
-                            <button class="btn btn-outline-secondary deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $product['id'] ?>">
+                            <button class="btn btn-outline-secondary deleteBtn dang" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $product['id'] ?>">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </div>

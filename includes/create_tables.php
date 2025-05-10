@@ -21,6 +21,17 @@ CREATE TABLE IF NOT EXISTS products (
     image VARCHAR(255)
 )";
 
+// جدول السلة
+$cartTable = "
+CREATE TABLE IF NOT EXISTS cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT DEFAULT 1,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+)";
+
 // انشاء الجداول والتحقق منها
 if (mysqli_query($conn, $usersTable)) {
     echo "Users table created successfully <br>";
@@ -32,6 +43,12 @@ if (mysqli_query($conn, $productsTable)) {
     echo "Products table created successfully <br>";
 } else {
     echo "Error creating products table: " . mysqli_error($conn) . "<br>";
+}
+
+if (mysqli_query($conn, $cartTable)) {
+    echo "Cart table created successfully <br>";
+} else {
+    echo "Error creating cart table: " . mysqli_error($conn) . "<br>";
 }
 
 mysqli_close($conn);

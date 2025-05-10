@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($password)) {
         $errors['password'] = "Password is required";
-    } elseif (strlen($password) < 6) {
-        $errors['password'] = "Password must be at least 6 characters long";
+    } elseif (strlen($password) < 5) {
+        $errors['password'] = "Password must be at least 5 characters long";
     }
 
     if (empty($confirm_password)) {
@@ -67,13 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link href="../assests/css/register-style.css" rel="stylesheet">
+    <link href="../assets/css/register-style.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="img">
-            <img src="../assests/images/reg-img/Logo.png" alt="Logo">
+            <img src="../assets/images/reg-img/Logo.png" alt="Logo">
         </div>
 
         <div class="register">

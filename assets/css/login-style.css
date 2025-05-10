@@ -10,8 +10,9 @@ body {
 }
 
 .container {
-    background-color:#faebd7;
-    width: 900px;
+    background-color: #faebd7;
+    width: 90%;
+    max-width: 900px;
     display: flex;
     border-radius: 20px;
     overflow: hidden;
@@ -19,15 +20,18 @@ body {
 }
 
 .img {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    max-width: 300px;
 }
 
 .photo-frame {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
 }
 
 .photo1 {
@@ -49,9 +53,11 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transform: rotate(8deg);
 }
-.login{
+
+.login {
     flex: 1;
-    padding: 40px;
+    padding: 40px; 
+    min-width: 300px;
 }
 
 h2 {
@@ -66,7 +72,7 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 8px;
     outline: none;
-    width: 90%;
+    width: 97%;
 }
 
 .input:focus {
@@ -77,7 +83,7 @@ h2 {
 button {
     background-color: #e88e8e;
     border: none;
-    padding:12px 30px;
+    padding: 12px 30px;
     border-radius: 8px;
     display: block;
     margin: 20px auto;
@@ -94,16 +100,16 @@ a {
     color: #e88e8e;
     text-decoration: none;
 }
+
 p {
     text-align: center;
-
 }
 
 a:hover {
     text-decoration: underline;
 }
 
-.alert , .er{
+.alert, .er {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -112,9 +118,15 @@ a:hover {
     background-color: #f0bdbd;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
+    .container {
+        flex-direction: column;
+        width: 95%;
+    }
     .img {
         display: none;
     }
+    .login {
+        padding: 20px;
+    }
 }
-
